@@ -8,6 +8,7 @@ export const todoSlice = createSlice({
   },
   reducers: {
     addTodo: (state, action) => {
+      console.log(action);
       const newTodo = {
         id: v4(),
         title: action.payload,
@@ -16,15 +17,21 @@ export const todoSlice = createSlice({
       state.todos.push(newTodo);
     },
     removeTodo: (state, action) => {
-      state.todos.splice(action.payload.id, 1);
+      console.log(action.payload);
+      // state.todos.splice(action.payload.id, 1);
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
     },
     todoCompleted: (state, action) => {
-      state.todos[action.payload].completed =
-        !state.todos[action.payload].completed;
+      console.log(action.payload);
+      console.log(state.todos)
+      state.todos.map((todo) => {
+        if (todo.id === action.payload) {
+          todo.completed = !todo.completed;
+        }
+      });
     },
   },
 });
 
 export const todoReducer = todoSlice.reducer;
-export const {addTodo,removeTodo,todoCompleted} = todoSlice.actions;
-
+export const { addTodo, removeTodo, todoCompleted } = todoSlice.actions;

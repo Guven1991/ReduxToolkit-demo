@@ -15,11 +15,12 @@ function TodoListComponent() {
     <div  style={{color: theme}}>
       <h1>Todo List Component</h1>
       <ul>
-        {todoList.map((todo,index)=> <li key={index}>
+        {todoList.map((todo)=> 
+        <li key={todo.id}>
             <span>{todo.title}</span>--
             <span>{String(todo.completed)}</span>--
-            <button onClick={() => {onDelete(index)}}>Delete</button>
-            <button onClick={()=> {dispatch(todoCompleted(index))}}>{String(todo.completed) === "false"? "In Progress": "Completed"}</button>
+            <button onClick={() => {onDelete(todo.id)}}>Delete</button>
+            <button onClick={()=> {dispatch(todoCompleted(todo.id))}}>{String(todo.completed) === "false"? "In Progress": "Completed"}</button>
         </li>  )}
       </ul>
     </div>
